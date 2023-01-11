@@ -73,16 +73,17 @@ module queens_GPU_call_device_search{
 
             do{
               board[depth] += 1;
+              const boardDepth : int(8) = board[depth];
               bit_test = 0;
-              bit_test |= 1<<board[depth];
+              bit_test |= 1<<boardDepth;
 
-              if(board[depth] == N_l){
+              if(boardDepth == N_l){
                 board[depth] = _EMPTY_;
                 //if(block_ub > upper)   block_ub = upper;
               }else if (!(flag &  bit_test ) && GPU_queens_stillLegal(board, depth)){
 
                 tree_size += 1;
-                flag |= (1<<board[depth]);
+                flag |= (1<<boardDepth);
 
                 depth += 1;
 
@@ -92,7 +93,7 @@ module queens_GPU_call_device_search{
               }else continue;
 
               depth -= 1;
-              flag &= ~(1<<board[depth]);
+              flag &= ~(1<<board[Depth]);
 
             }while(depth >= depthGlobal); //FIM DO DFS_BNB
 
@@ -120,17 +121,20 @@ module queens_GPU_call_device_search{
     var ld: int;
     var rd: int;
 
+    const boardR : int(8) = board[r];
+
     // Check vertical
     for i in 0..<r do
-      if (board[i] == board[r]) then safe = false;
+      if (board[i] == boardR) then safe = false;
 
     // Check diagonals
-    ld = board[r];  //left diagonal columns
-    rd = board[r];  // right diagonal columns
+    ld = boardR;  //left diagonal columns
+    rd = boardR;  // right diagonal columns
     for i in 0..<r by -1 {
+      const boardI : int(8) = board[i];
       ld -= 1;
       rd += 1;
-      if (board[i] == ld || board[i] == rd) then safe = false;
+      if (boardI == ld || boardI == rd) then safe = false;
     }
     return safe;
   }
