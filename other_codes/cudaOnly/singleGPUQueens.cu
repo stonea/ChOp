@@ -80,7 +80,10 @@ __device__  bool GPU_queens_stillLegal(const char *board, const int r){
   rd = board[r];  // right diagonal columns
   for ( i = r-1; i >= 0; --i) {
     --ld; ++rd;
-    if (board[i] == ld || board[i] == rd) safe = false;
+    if (board[i] == ld || board[i] == rd) {
+      safe = false;
+      break;
+    }
   }
 
   return safe;

@@ -130,7 +130,10 @@ module queens_GPU_call_device_search{
     for i in 0..<r by -1 {
       ld -= 1;
       rd += 1;
-      if (board[i] == ld || board[i] == rd) then safe = false;
+      if (board[i] == ld || board[i] == rd) {
+        safe = false;
+        break;
+      }
     }
     return safe;
   }
