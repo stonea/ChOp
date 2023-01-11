@@ -117,8 +117,8 @@ module queens_GPU_call_device_search{
   proc  GPU_queens_stillLegal(board, r) {
     var safe = true;
     var i: int;
-    var ld: int;
-    var rd: int;
+    var ld: int(8);
+    var rd: int(8);
 
     // Check vertical
     for i in 0..<r do

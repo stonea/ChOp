@@ -49,8 +49,8 @@ inline bool MCstillLegal(const char *board, const int r)
 {
 
     int i;
-    int ld;
-    int rd;
+    int8_t ld;
+    int8_t rd;
   // Check vertical
   for ( i = 0; i < r; ++i)
     if (board[i] == board[r]) return false;
